@@ -609,14 +609,16 @@ DataViewObjectsParser.InnumerablePropertyPrefix = /^_/;
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "E3": () => (/* binding */ initialState),
-/* harmony export */   "GN": () => (/* binding */ ReactCircleCard)
+/* harmony export */   "GN": () => (/* binding */ ReactCircleCard),
+/* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(378);
 
 const initialState = {
     textLabel: "",
     textValue: "",
-    size: 200
+    size: 200,
+    kpi: []
 };
 class ReactCircleCard extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
@@ -630,25 +632,37 @@ class ReactCircleCard extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }
     }
     componentWillMount() {
-        ReactCircleCard.updateCallback = (newState) => { this.setState(newState); };
+        ReactCircleCard.updateCallback = (newState) => {
+            this.setState(newState);
+        };
     }
     componentWillUnmount() {
         ReactCircleCard.updateCallback = null;
     }
     render() {
-        const { textLabel, textValue, size, background, borderWidth } = this.state;
+        const { textLabel, textValue, size, background, borderWidth, kpi } = this.state;
         const style = { width: size, height: size, background, borderWidth };
+        console.log(textLabel);
+        console.log(kpi);
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardTop", style: style }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardBottom" },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null,
-                    textLabel,
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("em", null, textValue)))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCard" },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "whole-circle" },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardTop theme-red-top" }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardBottom theme-red-bottom" },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null,
+                            textLabel,
+                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null),
+                            react__WEBPACK_IMPORTED_MODULE_0__.createElement("em", null, textValue)))),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "whole-circle" },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardTop theme-yellow-top" }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardBottom theme-yellow-bottom" })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "whole-circle" },
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardTop theme-green-top" }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "circleCardBottom theme-green-bottom" })))));
     }
 }
 ReactCircleCard.updateCallback = null;
-/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (ReactCircleCard)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReactCircleCard);
 
 
 /***/ }),
@@ -698,11 +712,13 @@ class VisualSettings extends DataViewObjectsParser {
 
 class Visual {
     constructor(options) {
+        console.log(options);
         this.reactRoot = react__WEBPACK_IMPORTED_MODULE_0__.createElement(_component_ReactCircleCard__WEBPACK_IMPORTED_MODULE_2__/* .ReactCircleCard */ .GN, {});
         this.target = options.element;
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(this.reactRoot, this.target);
     }
     update(options) {
+        console.log(options);
         if (options.dataViews && options.dataViews[0]) {
             const dataView = options.dataViews[0];
             this.viewport = options.viewport;
@@ -715,8 +731,10 @@ class Visual {
                 borderWidth: object && object.circleThickness ? object.circleThickness : undefined,
                 background: object && object.circleColor ? object.circleColor : undefined,
                 textLabel: dataView.metadata.columns[0].displayName,
-                textValue: dataView.single.value.toString()
+                textValue: dataView.single.value.toString(),
+                kpi: dataView
             });
+            console.log(_component_ReactCircleCard__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .ZP);
         }
         else {
             this.clear();

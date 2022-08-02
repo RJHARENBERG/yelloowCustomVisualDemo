@@ -5,6 +5,7 @@ export interface State {
     size: number;
     background?: string;
     borderWidth?: number;
+    kpi: object;
 }
 export declare const initialState: State;
 export declare class ReactCircleCard extends React.Component<{}, State> {

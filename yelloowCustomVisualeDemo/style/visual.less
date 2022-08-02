@@ -1,28 +1,40 @@
+.circleCard{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  //flex-direction: column;
+
+
+}
+
+.whole-circle{
+  margin: 10px;
+}
+
 .circleCardTop {
   position: relative;
   box-sizing: border-box;
-  border: 1px solid #000;
   border-top-left-radius: 100% 200%;
   border-top-right-radius: 100% 200%;
 
-  max-width: 100px;
-  max-height: 50px;
+  width: 100px;
+  height: 50px;
 
-  background: rgb(255,222,0);
-  background: linear-gradient(0deg, rgba(255,222,0,1) 0%, rgba(253,198,45,1) 100%);
+  padding-bottom: 50px;
+
 }
 
 .circleCardBottom{
-  position: relative;
+  position: absolute;
+  top: 60px;
   box-sizing: border-box;
-  border: 1px solid #000;
   border-bottom-left-radius: 100% 200%;
   border-bottom-right-radius: 100% 200%;
 
-  max-width: 100px;
-  max-height: 50px;
+  width: 100px;
+  height: 50px;
 
-  background: #fdc62d;
+
 }
 
 p {
@@ -34,4 +46,35 @@ p {
   position: relative;
   top: -30px;
   margin: 50% 0 0 0;
+}
+
+.theme-yellow-top{
+  background: rgb(255,222,0);
+  background: linear-gradient(0deg, rgba(255,222,0,1) 0%, rgba(253,198,45,1) 100%);
+}
+
+.theme-yellow-bottom{
+  background: #fdc62d;
+}
+
+.theme-red-top{
+  background: rgb(255,70,70);
+  background: linear-gradient(0deg, rgba(255,70,70,1) 0%, rgba(251,0,0,1) 100%);
+
+}
+
+.theme-red-bottom{
+  background: #fb0000;
+
+}
+
+.theme-green-top{
+  background: rgb(0,255,38);
+  background: linear-gradient(0deg, rgba(0,255,38,1) 0%, rgba(2,210,5,1) 100%);
+
+}
+
+.theme-green-bottom{
+  background: #02d205;
+
 }

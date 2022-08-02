@@ -7,7 +7,7 @@ import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisual = powerbi.extensibility.visual.IVisual;
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {ReactCircleCard, initialState} from "../component/ReactCircleCard";
+import reactCircleCard, {ReactCircleCard, initialState} from "../component/ReactCircleCard";
 import IViewport = powerbi.IViewport;
 import VisualObjectInstance = powerbi.VisualObjectInstance;
 import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
@@ -15,6 +15,7 @@ import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnume
 import {VisualSettings} from "./settings";
 
 import "./../style/visual.less";
+import data = powerbi.data;
 
 export class Visual implements IVisual {
     private target: HTMLElement;
@@ -23,6 +24,7 @@ export class Visual implements IVisual {
     private settings: VisualSettings;
 
     constructor(options: VisualConstructorOptions) {
+        console.log(options)
         this.reactRoot = React.createElement(ReactCircleCard, {});
         this.target = options.element;
 
@@ -30,6 +32,7 @@ export class Visual implements IVisual {
     }
 
     public update(options: VisualUpdateOptions) {
+        console.log(options)
         if (options.dataViews && options.dataViews[0]) {
             const dataView: DataView = options.dataViews[0];
 
@@ -44,12 +47,15 @@ export class Visual implements IVisual {
                 borderWidth: object && object.circleThickness ? object.circleThickness : undefined,
                 background: object && object.circleColor ? object.circleColor : undefined,
                 textLabel: dataView.metadata.columns[0].displayName,
-                textValue: dataView.single.value.toString()
+                textValue: dataView.single.value.toString(),
+                kpi: dataView
             });
+            console.log(reactCircleCard)
         } else {
             this.clear();
         }
     }
+
 
     private clear() {
         ReactCircleCard.update(initialState);
